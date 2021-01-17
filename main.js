@@ -2043,7 +2043,7 @@ function createNotificationStates(serialOrName) {
         setOrUpdateObject(devId + '.Timer.nextTimerDate', {common: {type: 'number', role: 'date', name: 'Unix epoch timestamp for next timer'}}, nextValue, nextTimerObject ? nextTimerObject.set : null);
         if(nextValue == 0)
         {
-            deleteObject(devId + '.Timers');
+            deleteObject(devId + '.Timers', true);
         }
     }
 }
