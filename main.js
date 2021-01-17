@@ -2036,11 +2036,11 @@ function createNotificationStates(serialOrName) {
                 if(element.status == 'ON')
                 {
                     adapter.log.info("Set Timer");
-                    setOrUpdateObject(devId + 'Timers.' + element.id +'.nextTimerDate', {common: {type: 'number', role: 'date', name: 'Unix epoch timestamp for next timer'}}, element ? (Date.now() + element.remainingTime) : 0, element ? element.set : null);
+                    setOrUpdateObject(devId + '.Timers.' + element.id +'.nextTimerDate', {common: {type: 'number', role: 'date', name: 'Unix epoch timestamp for next timer'}}, element ? (Date.now() + element.remainingTime) : 0, element ? element.set : null);
                 }
                 else
                 {
-                    deleteObject(devId + 'Timers.' + element.id);
+                    deleteObject(devId + '.Timers.' + element.id);
                 }
               
             });
