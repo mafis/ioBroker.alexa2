@@ -1991,7 +1991,6 @@ function createNotificationStates(serialOrName) {
             if (noti.type === 'Reminder' && !device.capabilities.includes('REMINDERS')) continue;
             if (noti.type === 'Alarm' && !device.capabilities.includes('TIMERS_AND_ALARMS')) continue;
             if (noti.type === 'Timer' && noti.status === 'ON' && noti.remainingTime > 0) {
-                timers.push(noti);
                 adapter.log.debug(noti.type + ' ' + noti.id + ' triggered in ' + Math.floor(noti.remainingTime / 1000) + 's');
                 if (nextTimerObject === null || nextTimerObject.remainingTime > noti.remainingTime) {
                     nextTimerObject = noti;
@@ -2026,12 +2025,7 @@ function createNotificationStates(serialOrName) {
                 }
             }
         }
-
-        for (var i = 0; i< timers.length; i++)
-        {
-            var notification = timers[i];
-            setOrUpdateObject(devId + '.Timers.'+notification[i].id+'.nextTimerDate', {common: {type: 'number', role: 'date', name: 'Unix epoch timestamp for next timer'}}, notification ? (Date.now() + notification.remainingTime) : 0, notification ? notification.set : null);
-        }
+        setOrUpdateObject(devId + '.Timers.nextTimerDate', {common: {type: 'number', role: 'date', name: 'Unix epoch timestamp for next timer'}}, nextTimerObject ? (Date.now() + nextTimerObject.remainingTime) : 0, nextTimerObject ? nextTimerObject.set : null);
     }
 }
 
