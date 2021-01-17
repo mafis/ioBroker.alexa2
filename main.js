@@ -2033,7 +2033,7 @@ function createNotificationStates(serialOrName) {
         {
             adapter.log.info("Set timers…");
             timers.forEach(element => {    
-                if(noti.status == 'ON')
+                if(element.status == 'ON')
                 {
                     adapter.log.info("Set Timer");
                     setOrUpdateObject(devId + 'Timers.' + element.id +'.nextTimerDate', {common: {type: 'number', role: 'date', name: 'Unix epoch timestamp for next timer'}}, element ? (Date.now() + element.remainingTime) : 0, element ? element.set : null);
