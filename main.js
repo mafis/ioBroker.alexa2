@@ -1990,6 +1990,10 @@ function createNotificationStates(serialOrName) {
             }
             if (noti.type === 'Reminder' && !device.capabilities.includes('REMINDERS')) continue;
             if (noti.type === 'Alarm' && !device.capabilities.includes('TIMERS_AND_ALARMS')) continue;
+            if (noti.type === 'Timer')
+            {
+                timers.push(noti);
+            }
             if (noti.type === 'Timer' && noti.status === 'ON' && noti.remainingTime > 0) {
                 adapter.log.debug(noti.type + ' ' + noti.id + ' triggered in ' + Math.floor(noti.remainingTime / 1000) + 's');
                 if (nextTimerObject === null || nextTimerObject.remainingTime > noti.remainingTime) {
@@ -2025,6 +2029,18 @@ function createNotificationStates(serialOrName) {
                 }
             }
         }
+
+        timers.forEach(element => {
+            if(noti.status == 'ON')
+            {
+                setOrUpdateObject(devId + 'Timers.' + element.id +'.nextTimerDate', {common: {type: 'number', role: 'date', name: 'Unix epoch timestamp for next timer'}}, nextTimerObject ? (Date.now() + nextTimerObject.remainingTime) : 0, nextTimerObject ? nextTimerObject.set : null);
+            }
+            else
+            {
+                deleteObject(devId + 'Timers.' + element.id);
+            }
+        });
+        
         setOrUpdateObject(devId + '.Timer.nextTimerDate', {common: {type: 'number', role: 'date', name: 'Unix epoch timestamp for next timer'}}, nextTimerObject ? (Date.now() + nextTimerObject.remainingTime) : 0, nextTimerObject ? nextTimerObject.set : null);
     }
 }
