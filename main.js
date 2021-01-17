@@ -2035,7 +2035,7 @@ function createNotificationStates(serialOrName) {
                 if(element.status == 'ON')
                 {
                     setOrUpdateObject(devId + '.Timers.' + element.notificationIndex +'.timerDate', {common: {type: 'number', role: 'date', name: 'Unix epoch timestamp for next timer'}}, element ? (Date.now() + element.remainingTime) : 0, element ? element.set : null);
-                    setOrUpdateObject(devId + '.Timers.' + element.notificationIndex +'.timerLabel', {common: {type: 'state', role: 'text', name: 'Name'}},element.timerLabel ? element.timerLabel : "Timer", element ? element.set : null);
+                    setOrUpdateObject(devId + '.Timers.' + element.notificationIndex +'.timerLabel', {common: {type: 'text', role: 'state', name: 'Name'}},element.timerLabel ? element.timerLabel : "Timer", element ? element.set : null);
                 }
             });
         }      
