@@ -2038,13 +2038,12 @@ function createNotificationStates(serialOrName) {
                     setOrUpdateObject(devId + '.Timers.' + element.notificationIndex +'.timerLabel', {common: {type: 'text', role: 'state', name: 'Name'}},element.timerLabel ? element.timerLabel : "Timer", element ? element.set : null);
                 }
             });
-        }      
-
-        if(nextTimerObject == null)
+        } 
+        setOrUpdateObject(devId + '.Timer.nextTimerDate', {common: {type: 'number', role: 'date', name: 'Unix epoch timestamp for next timer'}}, nextTimerObject ? (Date.now() + nextTimerObject.remainingTime) : 0, nextTimerObject ? nextTimerObject.set : null);
+        if(getState(devId + '.Timer.nextTimerDate').val == 0)
         {
             deleteObject(devId + '.Timers');
         }
-        setOrUpdateObject(devId + '.Timer.nextTimerDate', {common: {type: 'number', role: 'date', name: 'Unix epoch timestamp for next timer'}}, nextTimerObject ? (Date.now() + nextTimerObject.remainingTime) : 0, nextTimerObject ? nextTimerObject.set : null);
     }
 }
 
