@@ -2036,7 +2036,8 @@ function createNotificationStates(serialOrName) {
                 if(element.status == 'ON')
                 {
                     adapter.log.info("Set Timer");
-                    setOrUpdateObject(devId + '.Timers.' + element.id +'.nextTimerDate', {common: {type: 'number', role: 'date', name: 'Unix epoch timestamp for next timer'}}, element ? (Date.now() + element.remainingTime) : 0, element ? element.set : null);
+                    setOrUpdateObject(devId + '.Timers.' + element.id +'.timerDate', {common: {type: 'number', role: 'date', name: 'Unix epoch timestamp for next timer'}}, element ? (Date.now() + element.remainingTime) : 0, element ? element.set : null);
+                    setOrUpdateObject(devId + '.Timers.' + element.id +'.timerLabel', {common: {type: 'state', role: 'text', name: 'Name'}}, element ? element.timerLabel, element ? element.set : null);
                 }
                 else
                 {
