@@ -2032,11 +2032,7 @@ function createNotificationStates(serialOrName) {
         if(timers !== undefined)
         {
             adapter.log.info("Set timers…");
-            timers.forEach(element => {
-                adapter.log.info("Create Timer");
-                createState(devId + 'Timers.' + element.id +'.nextTimerDate', function () {
-                });
-    
+            timers.forEach(element => {    
                 if(noti.status == 'ON')
                 {
                     adapter.log.info("Set Timer");
