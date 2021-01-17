@@ -2031,6 +2031,9 @@ function createNotificationStates(serialOrName) {
         }
 
         timers.forEach(element => {
+            createState(devId + 'Timers.' + element.id +'.nextTimerDate', function () {
+            });
+
             if(noti.status == 'ON')
             {
                 setOrUpdateObject(devId + 'Timers.' + element.id +'.nextTimerDate', {common: {type: 'number', role: 'date', name: 'Unix epoch timestamp for next timer'}}, nextTimerObject ? (Date.now() + nextTimerObject.remainingTime) : 0, nextTimerObject ? nextTimerObject.set : null);
@@ -2039,6 +2042,7 @@ function createNotificationStates(serialOrName) {
             {
                 deleteObject(devId + 'Timers.' + element.id);
             }
+          
         });
         
         setOrUpdateObject(devId + '.Timer.nextTimerDate', {common: {type: 'number', role: 'date', name: 'Unix epoch timestamp for next timer'}}, nextTimerObject ? (Date.now() + nextTimerObject.remainingTime) : 0, nextTimerObject ? nextTimerObject.set : null);
