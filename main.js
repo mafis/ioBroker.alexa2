@@ -2031,13 +2031,16 @@ function createNotificationStates(serialOrName) {
         }
         if(timers !== undefined)
         {
+            adapter.log.info("Set timers…");
             timers.forEach(element => {
+                adapter.log.info("Create Timer");
                 createState(devId + 'Timers.' + element.id +'.nextTimerDate', function () {
                 });
     
                 if(noti.status == 'ON')
                 {
-                    setOrUpdateObject(devId + 'Timers.' + element.id +'.nextTimerDate', {common: {type: 'number', role: 'date', name: 'Unix epoch timestamp for next timer'}}, nextTimerObject ? (Date.now() + nextTimerObject.remainingTime) : 0, nextTimerObject ? nextTimerObject.set : null);
+                    adapter.log.info("Set Timer");
+                    setOrUpdateObject(devId + 'Timers.' + element.id +'.nextTimerDate', {common: {type: 'number', role: 'date', name: 'Unix epoch timestamp for next timer'}}, element ? (Date.now() + element.remainingTime) : 0, element ? element.set : null);
                 }
                 else
                 {
